@@ -6,8 +6,11 @@ use App\Http\Controllers\TunjanganWijayaController;
 use App\Http\Controllers\pejabatAjaxController;
 use App\Http\Controllers\ProdakController;
 use App\Http\Controllers\LatihanController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\sessionController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +25,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [JabatanWijayaController::class, 'dashboard']);
 
 
-Route::resource('tunjanganNanda', TunjanganNandaController::class);
 
 Route::resource('jabatanwijaya', JabatanWijayaController::class);
 Route::post('/update-jabatan', [JabatanWijayaController::class, 'updatejabatan'])->name('update.jabatan');
@@ -32,7 +34,10 @@ Route::resource('TunjanganWijaya', TunjanganWijayaController::class);
 Route::resource('pejabatAjax', pejabatAjaxController::class);
 
 Route::get('prodak', [ProdakController::class, 'prodaks'])->name('prodaks');
-Route::post('/add-prodak', [ProdakController::class, 'addprodak'])->name('add.prodak');
+// Route::put('/add-prodak', [ProdakController::class, 'addprodak'])->name('add.prodak');
+Route::match(['post', 'put'], '/add-prodak', [ProdakController::class, 'addprodak'])->name('add.prodak');
+
+
 Route::post('/update-prodak', [ProdakController::class, 'updateprodak'])->name('update.prodak');
 Route::post('/delete_prodak', [ProdakController::class, 'deleteProdak'])->name('delete.prodak');
 // routes/web.php
@@ -40,3 +45,18 @@ Route::get('get-prodak', 'ProdakController@getProdak')->name('get.prodak');
 
 Route::get('latihan', [LatihanController::class, 'latihans'])->name('latihans');
 Route::post('/add-latihan', [ProdakController::class, 'addLatihan'])->name('add.latihan');
+
+
+Route::get('/sesi', [sessionController::class, 'index']);
+
+
+
+Auth::routes();
+
+// Rute yang memerlukan otentikasi
+Route::middleware(['auth'])->group(function () {
+    // Tambahkan rute yang memerlukan otentikasi di sini
+    // Contoh: Route::get('/dashboard', [DashboardController::class, 'index']);
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

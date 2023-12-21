@@ -1,466 +1,92 @@
-<!doctype html>
-<html lang="en">
+@extends('../layout.app')
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://kit.fontawesome.com/your_kit_code.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://kit.fontawesome.com/your_kit_code.js" crossorigin="anonymous"></script>
-    <link href="{{ asset('img/favicon.png') }}" rel="icon" />
-    <link href="{{ asset('img/apple-touch-icon.png') }}" rel="icon" />
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-    <!-- Google Fonts -->
-
-    <link href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
-
-    <!-- Vendor CSS Files -->
-    <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-    <!-- <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/quill/quill.snow.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/quill/quill.bubble.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/remixicon/remixicon.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/simple-datatables/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <title>Hello, world!</title>
-</head>
-
-<body>
-    <header id="header" class="header fixed-top d-flex align-items-center">
-        <div class="d-flex align-items-center justify-content-between">
-            <a href="./master.html" class="logo d-flex align-items-center">
-                <img src="../assets/img/logo.png" alt="" />
-                <span class="d-none d-lg-block">NiceAdmin</span>
-            </a>
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div>
-        <!-- End Logo -->
-
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword" />
-                <button type="submit" title="Search">
-                    <i class="bi bi-search"></i>
-                </button>
-            </form>
-        </div>
-        <!-- End Search Bar -->
-
-        <nav class="header-nav ms-auto">
-            <ul class="d-flex align-items-center">
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle" href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li>
-                <!-- End Search Icon-->
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-bell"></i>
-                        <span class="badge bg-primary badge-number">4</span> </a><!-- End Notification Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <li class="dropdown-header">
-                            You have 4 new notifications
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-exclamation-circle text-warning"></i>
-                            <div>
-                                <h4>Lorem Ipsum</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>30 min. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-x-circle text-danger"></i>
-                            <div>
-                                <h4>Atque rerum nesciunt</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>1 hr. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-check-circle text-success"></i>
-                            <div>
-                                <h4>Sit rerum fuga</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>2 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-info-circle text-primary"></i>
-                            <div>
-                                <h4>Dicta reprehenderit</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-                        <li class="dropdown-footer">
-                            <a href="#">Show all notifications</a>
-                        </li>
-                    </ul>
-                    <!-- End Notification Dropdown Items -->
-                </li>
-                <!-- End Notification Nav -->
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-chat-left-text"></i>
-                        <span class="badge bg-success badge-number">3</span> </a><!-- End Messages Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <li class="dropdown-header">
-                            You have 3 new messages
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="../assets/img/messages-1.jpg" alt="" class="rounded-circle" />
-                                <div>
-                                    <h4>Maria Hudson</h4>
-                                    <p>
-                                        Velit asperiores et ducimus soluta repudiandae labore
-                                        officia est ut...
-                                    </p>
-                                    <p>4 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="../assets/img/messages-2.jpg" alt="" class="rounded-circle" />
-                                <div>
-                                    <h4>Anna Nelson</h4>
-                                    <p>
-                                        Velit asperiores et ducimus soluta repudiandae labore
-                                        officia est ut...
-                                    </p>
-                                    <p>6 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="../assets/img/messages-3.jpg" alt="" class="rounded-circle" />
-                                <div>
-                                    <h4>David Muldon</h4>
-                                    <p>
-                                        Velit asperiores et ducimus soluta repudiandae labore
-                                        officia est ut...
-                                    </p>
-                                    <p>8 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li class="dropdown-footer">
-                            <a href="#">Show all messages</a>
-                        </li>
-                    </ul>
-                    <!-- End Messages Dropdown Items -->
-                </li>
-                <!-- End Messages Nav -->
-
-                <li class="nav-item dropdown pe-3">
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle" />
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span> </a><!-- End Profile Iamge Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header">
-                            <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-person"></i>
-                                <span>My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Account Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- End Profile Dropdown Items -->
-                </li>
-                <!-- End Profile Nav -->
-            </ul>
-        </nav>
-        <!-- End Icons Navigation -->
-    </header>
-    <aside id="sidebar" class="sidebar">
-        <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="./master.html">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <!-- End Dashboard Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="aprvGM.html">
-                            <i class="bi bi-circle"></i><span>Approval Page GM Manufacturing</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aprvKakaricho.html">
-                            <i class="bi bi-circle"></i><span>Approval Page Kakaricho</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aprvManager.html">
-                            <i class="bi bi-circle"></i><span>Approval Page Manager</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aprvQC.html">
-                            <i class="bi bi-circle"></i><span>Approval Page QC Manager</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- End Forms Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="tables-general.html">
-                            <i class="bi bi-circle"></i><span>General Tables</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tables-data.html">
-                            <i class="bi bi-circle"></i><span>Data Tables</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- End Tables Nav -->
-        </ul>
-    </aside>
-    <main id="main" class="main">
-        <div class="pagetitle">
-            <h1>Histori Perubahan Proses dan Perubahan Desain</h1>
-        </div>
-        <!-- End Page Title -->
-
-        <!-- SEARCH BUTTON -->
-        <form class="row g-3 align-items-center mb-3" style="size: 10px">
-            <div class="col">
-                <div class="input-group">
-                    <span class="input-group-text" id="inputGroup-sizing-default1">Tanggal Perubahan</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default1" />
-                </div>
+@section('content')
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Histori Perubahan Proses dan Perubahan Desain</h1>
+    </div>
+    {{-- SEARCH BUTTON--}}
+    <form class="row g-3 align-items-center mb-3" style="size: 10px" method="POST" action="#">
+        <div class="col-6"> {{--Search Line--}}
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroup-sizing-default1" style="font-size: 13px;">Search Line</span>
+                <select class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default1" style="font-size: 13px;">
+                    <option selected>Pilih Line</option>
+                    <!-- Tambahkan opsi di sini -->
+                    <option value="1">Line 1</option>
+                    <option value="2">Line 2</option>
+                    <option value="3">Line 3</option>
+                    <option value="4">Line 4</option>
+                    <option value="5">Line 5</option>
+                    <option value="6">Line 6</option>
+                    <option value="7">Line 7</option>
+                    <option value="8">Line 8</option>
+                    <option value="9">Line 9</option>
+                    <option value="10">Line 10</option>
+                    <option value="11">Line 11</option>
+                    <option value="12">Line 12</option>
+                    <option value="13">Line 13</option>
+                </select>
             </div>
-            <div class="col">
-                <div class="input-group">
-                    <span class="input-group-text" id="inputGroup-sizing-default2">Part Number</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" />
-                </div>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <span class="input-group-text" id="inputGroup-sizing-default3">Nama Perubahan</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default3" />
-                </div>
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-        </form>
-
-        <!-- END OF SERACH BUTTON -->
-
-        <!-- Pills Tabs -->
-        <div class="mb-3">
-            <ul class="nav nav-pills mb-2 mt-1" nav-fill id="pills-tab" role="tablist" style="border-color: black">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                        LINE 1
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
-                        LINE 2
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        LINE 3
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
-                        LINE 4
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        LINE 5
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
-                        LINE 6
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        LINE 7
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
-                        LINE 8
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        LINE 9
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        LINE 10
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        LINE 11
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        LINE 12
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        LINE 13
-                    </button>
-                </li>
-            </ul>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive mt-3">
-                    <h5 class="card-title">REQUEST LIST</h5>
-                    <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">add</a>
 
+        <div class="col-6"></div>
+        <div class="col"> {{--Tanggal perubahan--}}
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroup-sizing-default2" style="font-size: 13px;">Tanggal Perubahan</span>
+                <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default2" style="font-size: 13px;" />
+            </div>
+        </div>
+        <div class="col"> {{--Part Number--}}
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroup-sizing-default3" style="font-size: 13px;">Part Number</span>
+                <input type="number" min="0" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default3" style="font-size: 13px;" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroup-sizing-default4" style="font-size: 13px;">Nama Perubahan</span>
+                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default4" style="font-size: 13px;" />
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary" title="SEARCH">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </form>
+
+    <div class="d-flex mb-3 justify-content-end gap-3">
+        <a href="" class="btn btn-success d-inline-block mr-2 bi-download" data-bs-toggle="modal" data-bs-target="#export"> Download</a>
+        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">add</a>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive mt-3">
+                <h5 class="card-title">REQUEST LIST</h5>
+
+                <div class="datatable-container">
                     <table class="table datatable">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Nama proses</th>
                                 <th scope="col">Pelaksanaan 2nd QA</th>
-                                <th scope="col">Item Perubahan</th>
+                                <th scope="col">Klasifikasi perubahan</th>
                                 <th scope="col">No Lembar Instruksi</th>
+                                <th scope="col">Item Perubahan</th>
+                                <th scope="col">Nama proses</th>
                                 <th scope="col">Tanggal Produksi Saat Perubahan</th>
-                                <th scope="col">Shift</th>
                                 <th scope="col">Part Number Finish Good</th>
                                 <th scope="col">Kualitas</th>
                                 <th scope="col">Fakta NG</th>
                                 <th scope="col">PCDT</th>
                                 <th scope="col">Tanggal Perubahan PCDT</th>
-                                <th scope="col">Instruksi Kerja</th>
-                                <th scope="col">Tanggal Perubahan Instruksi Kerja</th>
+                                <th scope="col">IK</th>
+                                <th scope="col">Tanggal Perubahan IK</th>
                                 <th scope="col">ISIR</th>
                                 <th scope="col">Tanggal Perubahan ISIR</th>
-                                <th scope="col">Pemahaman</th>
+                                <th scope="col">Ulasan</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -468,14 +94,12 @@
                             @foreach ($prodaks as $row=>$prodak)
                             <tr>
                                 <th scope="row">{{$row+1}}</th>
-                                <td>{{$prodak->name}}</td>
-                                <td>Rp.@php echo number_format ($prodak->price) @endphp</td>
-                                <td>{{$prodak->nama_proses}}</td>
                                 <td>{{$prodak->pelaksanaan2ndQA}}</td>
-                                <td>{{$prodak->item_perubahan}}</td>
+                                <td>{{$prodak->klasifikasi_perubahan}}</td>
                                 <td>{{$prodak->no_lembar_instruksi}}</td>
+                                <td>{{$prodak->item_perubahan}}</td>
+                                <td>{{$prodak->nama_proses}}</td>
                                 <td>{{$prodak->tanggal_produksi_saat_perubahan}}</td>
-                                <td>{{$prodak->shift}}</td>
                                 <td>{{$prodak->part_number_finish_good}}</td>
                                 <td>{{$prodak->kualitas}}</td>
                                 <td>{{$prodak->fakta_ng}}</td>
@@ -487,39 +111,742 @@
                                 <td>{{$prodak->tanggal_perubahan_isir}}</td>
                                 <td>{{$prodak->pemahaman}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-warning updateProdakForm" data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $prodak->id }}" data-name="{{ $prodak->name }}" data-price="{{ $prodak->price }}" data-nama_proses="{{ $prodak->nama_proses }}" data-klasifikasi_perubahan="{{ $prodak->klasifikasi_perubahan }}" data-pelaksanaan2ndQA="{{ $prodak->pelaksanaan2ndQA }}" data-item_perubahan="{{ $prodak->item_perubahan }}" data-no_lembar_instruksi="{{ $prodak->no_lembar_instruksi }}" data-tanggal_produksi_saat_perubahan="{{ $prodak->tanggal_produksi_saat_perubahan }}" data-shift="{{ $prodak->shift }}" data-part_number_finish_good="{{ $prodak->part_number_finish_good }}" data-kualitas="{{ $prodak->kualitas }}" data-fakta_ng="{{ $prodak->fakta_ng }}" data-pcdt="{{ $prodak->pcdt }}" data-tanggal_perubahan_pcdt="{{ $prodak->tanggal_perubahan_pcdt }}" data-instruksi_kerja="{{ $prodak->instruksi_kerja }}" data-tanggal_perubahan_instruksi_kerja="{{ $prodak->tanggal_perubahan_instruksi_kerja }}" data-isir="{{ $prodak->isir }}" data-tanggal_perubahan_isir="{{ $prodak->tanggal_perubahan_isir }}" data-pemahaman="{{ $prodak->pemahaman }}">
-                                        <i class="las la-edit"></i>
-                                    </a>
+                                    <div class="d-flex justify-content-between" style="width: 100px">
+                                        <a href="#" class="btn btn-warning btn-sm updateProdakForm" data-bs-toggle="modal" data-bs-target="#updateModal" data-id="{{ $prodak->id }}" data-nama_proses="{{ $prodak->nama_proses }}" data-klasifikasi_perubahan="{{ $prodak->klasifikasi_perubahan }}" data-pelaksanaan2ndQA="{{ $prodak->pelaksanaan2ndQA }}" data-item_perubahan="{{ $prodak->item_perubahan }}" data-no_lembar_instruksi="{{ $prodak->no_lembar_instruksi }}" data-tanggal_produksi_saat_perubahan="{{ $prodak->tanggal_produksi_saat_perubahan }}" data-shift="{{ $prodak->shift }}" data-part_number_finish_good="{{ $prodak->part_number_finish_good }}" data-kualitas="{{ $prodak->kualitas }}" data-fakta_ng="{{ $prodak->fakta_ng }}" data-pcdt="{{ $prodak->pcdt }}" data-tanggal_perubahan_pcdt="{{ $prodak->tanggal_perubahan_pcdt }}" data-instruksi_kerja="{{ $prodak->instruksi_kerja }}" data-tanggal_perubahan_instruksi_kerja="{{ $prodak->tanggal_perubahan_instruksi_kerja }}" data-isir="{{ $prodak->isir }}" data-tanggal_perubahan_isir="{{ $prodak->tanggal_perubahan_isir }}" data-pemahaman="{{ $prodak->pemahaman }}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+                                        <a href="#" class="btn btn-danger btn-sm delete_prodak" data-id="{{ $prodak->id }}"><i class="fas fa-trash"></i> </a>
+                                    </div>
 
-                                    <a href="" class="btn btn-danger delete_prodak" data-id="{{ $prodak->id }}"><i class="las la-times"></i></a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {!! $prodaks->links() !!}
                 </div>
             </div>
         </div>
-    </main>
-    @extends('prodak.update_prodak_modal')
-    @extends('prodak.add_prodak_modal')
-    @extends('prodak.prodak_js')
-    {!! Toastr::message() !!}
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    </div>
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+        <form action="" method="post" id="addProdakForm">
 
-    <!-- Vendor JS Files -->
-    <link rel="stylesheet" href="">
+            @csrf
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addModalLabel">Add prodak</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="errMsgContainer">
 
-    <script src="{{ asset('vendor/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('vendor/chart.js/chart.umd.js') }}"></script>
-    <script src="{{ asset('vendor/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('vendor/quill/quill.min.js') }}"></script>
-    <script src="{{ asset('vendor/simple-datatables/simple-datatables.js') }}"></script>
-    <script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('vendor/php-email-form/validate.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-</body>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="nama_proses" class="form-control" style="font-size: 15px; text-align: center">Nama Proses</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="nama_proses" id="nama_proses" autofocus />
+                            </div>
+                        </div>
+                        <!-- END OF NAMA PROSES -->
 
-</html>
+                        <!-- KLASIFIKASI PERUBAHAN -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="klasifikasi_perubahan" class="form-control" style="font-size: 15px; text-align: center">Klasifikasi Perubahan</label>
+                            </div>
+                            <div class="col-md-9">
+                                <label class="btn btn-outline-primary" style="width: 100%;">
+                                    <input class="form-check-input" type="radio" name="klasifikasi_perubahan" value="design" required>
+                                    Design
+                                </label>
+
+                                <label class="btn btn-outline-primary" style="width: 100%;">
+                                    <input class="form-check-input" type="radio" name="klasifikasi_perubahan" value="proses" required>
+                                    Proses
+                                </label>
+                            </div>
+                        </div>
+                        <!-- END OF KLASIFIKASI PERUBAHAN -->
+
+                        <!-- PELAKSANAAN 2ND QA -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="pelaksanaan2ndQA" class="form-control" style="font-size: 15px; text-align: center">Pelaksanaan 2nd QA</label>
+                            </div>
+                            <div class="col-md-9 pt-1">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="changesMade" name="pelaksanaan2ndQA" value="ada" />
+                                    <label class="form-check-label" for="changesMade">
+                                        Ada
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="newProducts" name="pelaksanaan2ndQA" value="tidak" />
+                                    <label class="form-check-label" for="newProducts">
+                                        Tidak Ada
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ITEM PERUBAHAN -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="item_perubahan" class="form-control" style="font-size: 15px; text-align: center">Item Perubahan</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="item_perubahan" id="item_perubahan" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                            </div>
+                        </div>
+                        <!-- END OF ITEM PERUBAHAN -->
+
+                        <!-- LEMBAR INSTRUKSI -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="no_lembar_instruksi" class="form-control" style="font-size: 15px; text-align: center">Lembar Instruksi</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="no_lembar_instruksi" id="no_lembar_instruksi" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                            </div>
+                        </div>
+                        <!-- END OF LEMBAR INSTRUKSI -->
+
+                        <!-- PRODUKSI SAAT PERUBAHAN -->
+                        <div class="row mb-3">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="tanggal_produksi_saat_perubahan" class="form-control" style="font-size: 15px; text-align: center">Tanggal Produksi saat Perubahan</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="date" id="tanggal_produksi_saat_perubahan" name="tanggal_produksi_saat_perubahan" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="shiftt" class="form-control" style="font-size: 15px; text-align: center">Shiftt</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="sift_a" name="shiftt" value="sift a" required />
+                                            <label class="form-check-label" for="sift_a">Sift A</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="sift_b" name="shiftt" value="sift b" />
+                                            <label class="form-check-label" for="sift_b">Sift B</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="sift_c" name="shiftt" value="sift c" />
+                                            <label class="form-check-label" for="sift_c">Sift C</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="non_shiftt" name="shiftt" value="non shiftt" />
+                                            <label class="form-check-label" for="non_shiftt">Non Shiftt</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PART NUMBER FINISH GOOD -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="part_number_finish_good" class="form-control" style="font-size: 15px; text-align: center">Part Number Finish Good</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="part_number_finish_good" id="part_number_finish_good" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                                <small class="form-text text-muted">Part number pertama yang diproduksi pertama kali saat terjadi perubahan</small>
+                            </div>
+                        </div>
+                        <!-- END OF PART NUMBER -->
+                        <!-- KUALITAS -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="kualitas" class="form-control" style="font-size: 15px; text-align: center">Kualitas</label>
+                            </div>
+                            <div class="col-md-9 pt-1">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="kualitasO" name="kualitas" value="O" />
+                                    <label class="form-check-label" for="kualitasO">
+                                        OK
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="kualitasX" name="kualitas" value="X" />
+                                    <label class="form-check-label" for="kualitasX">
+                                        NG
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF KUALITAS -->
+
+                        <!-- FAKTA - FAKTA NG -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="fakta_ng" class="form-control" style="font-size: 15px; text-align: center">Fakta-Fakta NG</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="fakta_ng" id="fakta_ng" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                            </div>
+                        </div>
+                        <!-- END OF FAKTA NG -->
+
+                        <!-- PCDT -->
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <label for="pcdt" class="form-control" style="font-size: 15px; text-align: center">PCDT</label>
+                            </div>
+                            <div class="col-md-9 pt-1">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="pcdtO" name="pcdt" value="O" />
+                                    <label class="form-check-label" for="pcdtO">
+                                        Revised
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="pcdtNotX" name="pcdt" value="X" />
+                                    <label class="form-check-label" for="pcdtNotX">
+                                        Not Revised
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="tanggal_perubahan_pcdt" class="form-control" style="font-size: 15px; text-align: center">Issued Date</label>
+                                </div>
+                                <div class="col space-between">
+                                    <input class="form-control" type="date" id="tanggal_perubahan_pcdt" name="tanggal_perubahan_pcdt" disabled required />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF PCDT -->
+
+                        <!-- INSTRUKSI KERJA -->
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Instruksi Kerja</label>
+                            </div>
+                            <div class="col-md-3 pt-1">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="instruksi_O" name="instruksi_kerja" value="O">
+                                    <label class="form-check-label" for="instruksi_O">Revised</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="instruksi_X" name="instruksi_kerja" value="X">
+                                    <label class="form-check-label" for="instruksi_X">Not Revised</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" type="date" id="tanggal_perubahan_instruksi_kerja" name="tanggal_perubahan_instruksi_kerja" required />
+                            </div>
+                        </div>
+                        <!-- END OF INSTRUKSI KERJA -->
+
+                        <!-- ISIR -->
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">ISIR</label>
+                            </div>
+                            <div class="col-md-3 pt-1">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="isir_O" name="isir" value="O">
+                                    <label class="form-check-label" for="isir_O">Revised</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="Isir_X" name="isir" value="X">
+                                    <label class="form-check-label" for="Isir_X">Not Revised</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control" type="date" id="tanggal_perubahan_isir" name="tanggal_perubahan_isir" required />
+                            </div>
+                        </div>
+                        <!-- END OF ISIR -->
+
+                        <!-- PEMAHAMAN BEFORE AFTER -->
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Pemahaman</label>
+                            </div>
+                            <div class="col-md-3 pt-1">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="pemahaman_paham" name="pemahaman" value="paham">
+                                    <label class="form-check-label" for="pemahaman_paham">Revised</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="pemahaman_kurangpaham" name="pemahaman" value="kurangpaham">
+                                    <label class="form-check-label" for="pemahaman_kurangpaham">kurang paham</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="pemahaman_tidak_sama_sekali" name="pemahaman" value="tidak_sama_sekali">
+                                    <label class="form-check-label" for="pemahaman_tidak_sama_sekali">Tidak sama sekali</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- END OF BEFORE AFTER -->
+
+                        <!-- ULASAN -->
+                        <div class="row mb-3 mt-2">
+                            <div class="col-md-3">
+                                <label for="ulasan" class="form-control" style="font-size: 15px; text-align: center">Ulasan</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="ulasan" id="ulasan" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                            </div>
+                        </div>
+                        <!-- END OF ULASAN -->
+
+                        <!-- HANCHOU -->
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Hanchou</label>
+                            </div>
+                            <div class="col-md-4">
+                                <script>
+                                    // Simulasikan proses login
+                                    var user = {
+                                        name: "Nama Hanchou"
+                                    };
+                                    localStorage.setItem("user", JSON.stringify(user));
+
+                                    // Isi input dengan nama pengguna yang login saat itu
+                                    window.onload = function() {
+                                        var loggedInUser = JSON.parse(
+                                            localStorage.getItem("user")
+                                        );
+                                        if (loggedInUser) {
+                                            document.getElementById("username").value =
+                                                loggedInUser.name;
+                                        }
+                                    };
+                                </script>
+
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="username" placeholder="Nama Hanchou" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF HANCHOU -->
+                        <!-- TOMBOL SUBMIT -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="submitButton" onclick="openModal('modal2')">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal 2 -->
+                <div class="modal" id="modal2">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Approval request to</h4>
+                                <button type="button" class="close" data-dismiss="modal" onclick="resetModal('addModal')">&times;</button>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                <p>Choose an option:</p>
+
+                                <!-- Select Option -->
+                                <div class="form-group">
+                                    <label for="approvalOption">Approval Option</label>
+                                    <select class="form-control" id="approvalOption" name="approvalOption">
+                                        <option value="approve">Approve</option>
+                                        <option value="reject">Reject</option>
+                                        <option value="hold">Hold</option>
+                                    </select>
+                                </div>
+
+                                <!-- Additional content for Modal 2 -->
+                                <p>Additional content for Modal 2 goes here.</p>
+
+                                <!-- Modal Footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary add_prodak">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+
+
+    <script>
+        function openModal(modalId) {
+            $('#' + modalId).modal('show');
+        }
+
+        function resetModal(modalId) {
+            $('#' + modalId).modal('show');
+        }
+
+        function completeModal() {
+            alert('Modals completed!');
+            // You can perform additional actions here if needed
+        }
+    </script>
+
+</main>
+<!-- modal update -->
+<div class=" modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <form action="" method="post" id="updateProdakForm">
+
+        @csrf
+        <input type="hidden" name="up_id" id="up_id">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">update prodak</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="errMsgContainer">
+
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="up_nama_proses" class="form-control" style="font-size: 15px; text-align: center">Nama Proses</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="up_nama_proses" id="up_nama_proses" autofocus />
+                        </div>
+                    </div>
+                    <!-- END OF NAMA PROSES -->
+
+                    <!-- KLASIFIKASI PERUBAHAN -->
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="up_klasifikasi_perubahan" class="form-label">Klasifikasi Perubahan</label>
+                        </div>
+                        <div class="col-md-9">
+                            <!-- Ganti dengan elemen radio button sesuai kebutuhan -->
+                            <div class="btn-group" role="group" aria-label="Klasifikasi Perubahan" style="width: 100%;">
+                                <label class="btn btn-outline-primary">
+                                    <input type="radio" name="up_klasifikasi_perubahan" value="design" {{ $prodak->klasifikasi_perubahan == 'design' ? 'checked' : '' }} required>
+                                    Design
+                                </label>
+                                <label class="btn btn-outline-primary">
+                                    <input type="radio" name="up_klasifikasi_perubahan" value="proses" {{ $prodak->klasifikasi_perubahan == 'proses' ? 'checked' : '' }} required>
+                                    Proses
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OF KLASIFIKASI PERUBAHAN -->
+
+
+                    <!-- PELAKSANAAN 2ND QA -->
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="pelaksanaan2ndQA" class="form-control" style="font-size: 15px; text-align: center">Pelaksanaan 2nd QA</label>
+                        </div>
+                        <div class="col-md-9">
+                            <!-- Checkbox untuk opsi 'Ada' -->
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="changesMade" name="pelaksanaan2ndQA_ada" value="ada" {{ $prodak->pelaksanaan2ndQA == 'ada' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="changesMade">
+                                    Ada
+                                </label>
+                            </div>
+
+                            <!-- Checkbox untuk opsi 'Tidak Ada' -->
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="newProducts" name="pelaksanaan2ndQA_tidak" value="tidak" {{ $prodak->pelaksanaan2ndQA == 'tidak' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="newProducts">
+                                    Tidak Ada
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ITEM PERUBAHAN -->
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="up_item_perubahan" class="form-control" style="font-size: 15px; text-align: center">Item Perubahan</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="up_item_perubahan" id="up_item_perubahan" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                        </div>
+                    </div>
+                    <!-- END OF ITEM PERUBAHAN -->
+
+                    <!-- LEMBAR INSTRUKSI -->
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="up_no_lembar_instruksi" class="form-control" style="font-size: 15px; text-align: center">Lembar Instruksi</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="up_no_lembar_instruksi" id="up_no_lembar_instruksi" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                        </div>
+                    </div>
+                    <!-- END OF LEMBAR INSTRUKSI -->
+
+                    <!-- PRODUKSI SAAT PERUBAHAN -->
+                    <div class="row mb-3">
+                        <!-- Left Column -->
+                        <div class="col-md-6">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="up_tanggal_produksi_saat_perubahan" class="form-control" style="font-size: 15px; text-align: center">Tanggal Produksi saat Perubahan</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control" type="date" id="up_tanggal_produksi_saat_perubahan" name="up_tanggal_produksi_saat_perubahan" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="col-md-6">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="shiftt" class="form-control" style="font-size: 15px; text-align: center">Shiftt</label>
+                                </div>
+                                <!-- SHIFT -->
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="sift_a" name="shiftt" value="sift a" {{ $prodak->shift == 'sift a' ? 'checked' : '' }} required />
+                                        <label class="form-check-label" for="sift_a">Sift A</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="sift_b" name="shiftt" value="sift b" {{ $prodak->shift == 'sift b' ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="sift_b">Sift B</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="sift_c" name="shiftt" value="sift c" {{ $prodak->shift == 'sift c' ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="sift_c">Sift C</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="non_shiftt" name="shiftt" value="non shiftt" {{ $prodak->shift == 'non shiftt' ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="non_shiftt">Non Shiftt</label>
+                                    </div>
+                                </div>
+                                <!-- END OF SHIFT -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- PART NUMBER FINISH GOOD -->
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="up_part_number_finish_good" class="form-control" style="font-size: 15px; text-align: center">Part Number Finish Good</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="up_part_number_finish_good" id="up_part_number_finish_good" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                            <small class="form-text text-muted">Part number pertama yang diproduksi pertama kali saat terjadi perubahan</small>
+                        </div>
+                    </div>
+                    <!-- END OF PART NUMBER -->
+
+                    <!-- KUALITAS -->
+                    <!-- KUALITAS -->
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="kualitas" class="form-control" style="font-size: 15px; text-align: center">Kualitas</label>
+                        </div>
+                        <div class="col-md-9 pt-1">
+                            <!-- KUALITAS -->
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="kualitasO" name="up_kualitas" value="O" {{ $prodak->kualitas == 'O' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="kualitasO">OK</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="kualitasX" name="up_kualitas" value="X" {{ $prodak->kualitas == 'X' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="kualitasX">NG</label>
+                            </div>
+                            <!-- END OF KUALITAS -->
+                        </div>
+                    </div>
+                    <!-- END OF KUALITAS -->
+
+                    <!-- FAKTA - FAKTA NG -->
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="up_fakta_ng" class="form-control" style="font-size: 15px; text-align: center">Fakta-Fakta NG</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="up_fakta_ng" id="up_fakta_ng" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                        </div>
+                    </div>
+                    <!-- END OF FAKTA NG -->
+
+                    <!-- PCDT -->
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="up_pcdt" class="form-control" style="font-size: 15px; text-align: center">PCDT</label>
+                        </div>
+                        <div class="col-md-9 pt-1">
+                            <!-- PCDT -->
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="pcdtO" name="up_pcdt" value="O" {{ $prodak->pcdt == 'O' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="pcdtO">Revised</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="pcdtNotX" name="up_pcdt" value="X" {{ $prodak->pcdt == 'X' ? 'checked' : '' }} / <label class="form-check-label" for="pcdtNotX">Not Revised</label>
+                            </div>
+                            <!-- END OF PCDT -->
+
+                            <div class="col-md-3">
+                                <label for="up_tanggal_perubahan_pcdt" class="form-control" style="font-size: 15px; text-align: center">Issued Date</label>
+                            </div>
+                            <div class="col space-between">
+                                <input class="form-control" type="date" id="up_tanggal_perubahan_pcdt" name="up_tanggal_perubahan_pcdt" disabled required />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OF PCDT -->
+
+                    <!-- INSTRUKSI KERJA -->
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Instruksi Kerja</label>
+                        </div>
+                        <div class="col-md-3 pt-1">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="instruksi_O" name="up_instruksi_kerja" value="O" {{ $prodak->instruksi_kerja == 'O' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="instruksi_O">Revised</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="instruksi_X" name="up_instruksi_kerja" value="X" {{ $prodak->instruksi_kerja == 'X' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="instruksi_X">Not Revised</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="date" id="up_tanggal_perubahan_instruksi_kerja" name="up_tanggal_perubahan_instruksi_kerja" required />
+                        </div>
+                    </div>
+                    <!-- END OF INSTRUKSI KERJA -->
+
+                    <!-- ISIR -->
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">ISIR</label>
+                        </div>
+                        <div class="col-md-3 pt-1">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="isir_O" name="up_isir" value="O" {{ $prodak->isir == 'O' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="isir_O">Revised</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="Isir_X" name="up_isir" value="X" {{ $prodak->isir == 'X' ? 'checked' : '' }} />
+                                <label class="form-check-label" for="Isir_X">Not Revised</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="date" id="up_tanggal_perubahan_isir" name="up_tanggal_perubahan_isir" required />
+                        </div>
+                    </div>
+                    <!-- END OF ISIR -->
+
+                    <!-- PEMAHAMAN BEFORE AFTER -->
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Pemahaman</label>
+                        </div>
+                        <!-- Pemahaman -->
+                        <div class="col-md-3 pt-1">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="pemahaman_paham" name="up_pemahaman" value="paham" {{ $prodak->pemahaman == 'paham' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="pemahaman_paham">Paham</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="pemahaman_kurangpaham" name="up_pemahaman" value="kurang paham" {{ $prodak->pemahaman == 'kurang paham' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="pemahaman_kurangpaham">Kurang Paham</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="pemahaman_tidak_sama_sekali" name="up_pemahaman" value="tidak sama sekali" {{ $prodak->pemahaman == 'tidak sama sekali' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="pemahaman_tidak_sama_sekali">Tidak Sama Sekali</label>
+                            </div>
+                        </div>
+                        <!-- END OF Pemahaman -->
+
+                    </div>
+
+                    <!-- END OF BEFORE AFTER -->
+
+                    <!-- ULASAN -->
+                    <div class="row mb-3 mt-2">
+                        <div class="col-md-3">
+                            <label for="up_ulasan" class="form-control" style="font-size: 15px; text-align: center">Ulasan</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" name="up_ulasan" id="up_ulasan" placeholder="Insert Text (Area Text)" style="text-align: center" />
+                        </div>
+                    </div>
+                    <!-- END OF up_ULASAN -->
+
+                    <!-- HANCHOU -->
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Hanchou</label>
+                        </div>
+                        <div class="col-md-4">
+                            <script>
+                                // Simulasikan proses login
+                                var user = {
+                                    name: "Nama Hanchou"
+                                };
+                                localStorage.setItem("user", JSON.stringify(user));
+
+                                // Isi input dengan nama pengguna yang login saat itu
+                                window.onload = function() {
+                                    var loggedInUser = JSON.parse(
+                                        localStorage.getItem("user")
+                                    );
+                                    if (loggedInUser) {
+                                        document.getElementById("username").value =
+                                            loggedInUser.name;
+                                    }
+                                };
+                            </script>
+
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="username" placeholder="Nama Hanchou" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OF HANCHOU -->
+
+
+
+                    <!-- TOMBOL SUBMIT -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary update_prodak">Save</button>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+<!-- modal tambah -->
+
+
+@endsection

@@ -7,98 +7,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        // Initialize DataTable
-        var table = $('#datatable-search').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('get.prodak') }}",
-            columns: [{
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'price',
-                    name: 'price'
-                },
-                {
-                    data: 'nama_proses',
-                    name: 'nama_proses'
-                },
-                {
-                    data: 'klasifikasi_perubahan',
-                    name: 'klasifikasi_perubahan'
-                },
-                {
-                    data: 'pelaksanaan2ndQA',
-                    name: 'pelaksanaan2ndQA'
-                },
-                {
-                    data: 'item_perubahan',
-                    name: 'item_perubahan'
-                },
-                {
-                    data: 'no_lembar_instruksi',
-                    name: 'no_lembar_instruksi'
-                },
-                {
-                    data: 'tanggal_produksi_saat_perubahan',
-                    name: 'tanggal_produksi_saat_perubahan'
-                },
-                {
-                    data: 'shift',
-                    name: 'shift'
-                },
-                {
-                    data: 'part_number_finish_good',
-                    name: 'part_number_finish_good'
-                },
-                {
-                    data: 'kualitas',
-                    name: 'kualitas'
-                },
-                {
-                    data: 'fakta_ng',
-                    name: 'fakta_ng'
-                },
-                {
-                    data: 'pcdt',
-                    name: 'pcdt'
-                },
-                {
-                    data: 'tanggal_perubahan_pcdt',
-                    name: 'tanggal_perubahan_pcdt'
-                },
-                {
-                    data: 'instruksi_kerja',
-                    name: 'instruksi_kerja'
-                },
-                {
-                    data: 'tanggal_perubahan_instruksi_kerja',
-                    name: 'tanggal_perubahan_instruksi_kerja'
-                },
-                {
-                    data: 'isir',
-                    name: 'isir'
-                },
-                {
-                    data: 'tanggal_perubahan_isir',
-                    name: 'tanggal_perubahan_isir'
-                },
-                {
-                    data: 'pemahaman',
-                    name: 'pemahaman'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                }
-            ]
-        });
-    });
-    $(document).ready(function() {
-        $(document).on('click', '.add_prodak', function(e) {
+        $('#addProdakForm').submit(function(e) {
             e.preventDefault();
             let name = $('#name').val();
             let price = $('#price').val();
@@ -108,7 +17,7 @@
             let item_perubahan = $('#item_perubahan').val();
             let no_lembar_instruksi = $('#no_lembar_instruksi').val();
             let tanggal_produksi_saat_perubahan = $('#tanggal_produksi_saat_perubahan').val();
-            let shift = $('input[name="shift"]:checked').val();
+            let shiftt = $('input[name="shiftt"]:checked').val();
             let part_number_finish_good = $('#part_number_finish_good').val();
             let kualitas = $('input[name="kualitas"]:checked').val();
             let fakta_ng = $('#fakta_ng').val();
@@ -119,6 +28,7 @@
             let isir = $('input[name="isir"]:checked').val();
             let tanggal_perubahan_isir = $('#tanggal_perubahan_isir').val();
             let pemahaman = $('#pemahaman').val();
+            let ulasan = $('#ulasan').val();
 
             $.ajax({
                 url: "{{ route('add.prodak') }}",
@@ -132,7 +42,7 @@
                     item_perubahan: item_perubahan,
                     no_lembar_instruksi: no_lembar_instruksi,
                     tanggal_produksi_saat_perubahan: tanggal_produksi_saat_perubahan,
-                    shift: shift,
+                    shiftt: shiftt,
                     part_number_finish_good: part_number_finish_good,
                     kualitas: kualitas,
                     fakta_ng: fakta_ng,
@@ -142,16 +52,26 @@
                     tanggal_perubahan_instruksi_kerja: tanggal_perubahan_instruksi_kerja,
                     isir: isir,
                     tanggal_perubahan_isir: tanggal_perubahan_isir,
-                    pemahaman: pemahaman
+                    pemahaman: pemahaman,
+                    ulasan: ulasan
                     // Add other data fields as needed
                 },
 
                 success: function(res) {
-                    if (res.success) {
+                    if (res.status == 'success') {
                         $('#addModal').modal('hide');
                         $('#addProdakForm')[0].reset();
                         $('.table').load(location.href + ' .table');
-                        Swal.fire('Success!', 'Data berhasil ditambahkan', 'success');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Data berhasil ditambahkan',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "{{ route('prodaks') }}";
+                            }
+                        });
+
                     }
                 },
                 error: function(err) {
@@ -217,7 +137,7 @@
             let item_perubahan = $(this).data('item_perubahan');
             let no_lembar_instruksi = $(this).data('no_lembar_instruksi');
             let tanggal_produksi_saat_perubahan = $(this).data('tanggal_produksi_saat_perubahan');
-            let shift = $(this).data('shift');
+            let shiftt = $(this).data('shiftt');
             let part_number_finish_good = $(this).data('part_number_finish_good');
             let kualitas = $(this).data('kualitas');
             let fakta_ng = $(this).data('fakta_ng');
@@ -238,7 +158,7 @@
             $('#up_item_perubahan').val(item_perubahan);
             $('#up_no_lembar_instruksi').val(no_lembar_instruksi);
             $('#up_tanggal_produksi_saat_perubahan').val(tanggal_produksi_saat_perubahan);
-            $('#up_shift').val(shift);
+            $('#up_shiftt').val(shiftt);
             $('#up_part_number_finish_good').val(part_number_finish_good);
             $('#up_kualitas').val(kualitas);
             $('#up_fakta_ng').val(fakta_ng);
@@ -263,7 +183,7 @@
             let up_item_perubahan = $('#up_item_perubahan').val();
             let up_no_lembar_instruksi = $('#up_no_lembar_instruksi').val();
             let up_tanggal_produksi_saat_perubahan = $('#up_tanggal_produksi_saat_perubahan').val();
-            let up_shift = $('#up_shift').val();
+            let up_shiftt = $('#up_shiftt').val();
             let up_part_number_finish_good = $('#up_part_number_finish_good').val();
             let up_kualitas = $('#up_kualitas').val();
             let up_fakta_ng = $('#up_fakta_ng').val();
@@ -288,7 +208,7 @@
                     up_item_perubahan: up_item_perubahan,
                     up_no_lembar_instruksi: up_no_lembar_instruksi,
                     up_tanggal_produksi_saat_perubahan: up_tanggal_produksi_saat_perubahan,
-                    up_shift: up_shift,
+                    up_shiftt: up_shiftt,
                     up_part_number_finish_good: up_part_number_finish_good,
                     up_kualitas: up_kualitas,
                     up_fakta_ng: up_fakta_ng,
